@@ -1,0 +1,77 @@
+@Movies_Api_HostAddress = http://localhost:5201
+@Movie_Guid = b1df60b2-fcb1-443a-9145-a291adb68d9e
+@Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2NmNiNWM4My0yYTNjLTRjZTMtYWU5Mi01ZTE1OWMyZTg0MmUiLCJzdWIiOiJ0ZXN0QGRvbWFpbi5jb20iLCJlbWFpbCI6InRlc3RAZG9tYWluLmNvbSIsInVzZXJpZCI6IjgwZmQzOGQzLWZhNzAtNDI0NC05YzNjLTYwMzgxZWU3MzI0MSIsImFkbWluIjp0cnVlLCJuYmYiOjE3NDkwNDg2MzgsImV4cCI6MTc0OTA3NzQzOCwiaWF0IjoxNzQ5MDQ4NjM4LCJpc3MiOiJodHRwczovL3Jlc3Rtb3ZpZXMudG9rZW5zLmNvbSIsImF1ZCI6Imh0dHBzOi8vcmVzdG1vdmllcy5tb3ZpZXMuY29tIn0.QyOsQmhtHwZOhwzOZGP513_ItMCHAeVg2MOGD_eUCKg
+
+@ApiKey = ab813b98016e4cb8a0c1d2e3f4b5c6d
+POST {{Movies_Api_HostAddress}}/api/movies
+Accept: application/json
+Authorization: Bearer {{Token}}
+Content-Type: application/json
+
+{
+    "title": "Jumanji",
+    "yearOfRelease": 2008,
+    "genres": ["Science Fiction"]
+}
+###
+
+GET {{Movies_Api_HostAddress}}/api/movies/{{Movie_Guid}}?api-version=2.0
+Accept: application/json
+x-api-key: {{ApiKey}}
+###
+
+GET {{Movies_Api_HostAddress}}/api/movies?title=i&sortBy=-yearOfRelease&pageSize=10&page=1
+Accept: application/json
+Authorization: Bearer {{Token}}
+###
+
+PUT {{Movies_Api_HostAddress}}/api/movies/{{Movie_Guid}}
+Accept: application/json
+Authorization: Bearer {{Token}}
+Content-Type: application/json
+
+{
+    "title": "Inception",
+    "yearOfRelease": 2010,
+    "genres": ["Science Fiction", "Thriller"]
+}
+###
+
+DELETE {{Movies_Api_HostAddress}}/api/movies/{{Movie_Guid}}
+Authorization: Bearer {{Token}}
+###
+
+POST {{Movies_Api_HostAddress}}/token
+Accept: application/json
+Content-Type: application/json
+
+{
+    "userId": "80fd38d3-fa70-4244-9c3c-60381ee73241",
+    "email": "test@domain.com",
+    "customClaims": {
+        "admin": true
+    }
+}
+###
+
+PUT {{Movies_Api_HostAddress}}/api/movies/{{Movie_Guid}}/ratings
+Accept: application/json
+Authorization: Bearer {{Token}}
+Content-Type: application/json
+
+{
+    "rating": 3
+}
+###
+
+DELETE {{Movies_Api_HostAddress}}/api/movies/{{Movie_Guid}}/ratings
+Accept: application/json
+Authorization: Bearer {{Token}}
+###
+
+GET {{Movies_Api_HostAddress}}/api/ratings/me
+Accept: application/json
+Authorization: Bearer {{Token}}
+###
+
+GET {{Movies_Api_HostAddress}}/_health
